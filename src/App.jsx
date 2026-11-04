@@ -3,6 +3,8 @@ import { categories, products } from './data/products.js'
 import './App.css'
 
 const STORE_NAME = 'Mi Tienda'
+// Las rutas que empiezan por "/" apuntan a /public y necesitan la base de Vite (GitHub Pages).
+const assetUrl = (path) => (path.startsWith('/') ? import.meta.env.BASE_URL + path.slice(1) : path)
 const YEAR = new Date().getFullYear()
 const currency = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' })
 
@@ -11,7 +13,7 @@ function ProductCard({ product, onAdd }) {
     <article className="card">
       <div className="card-media" style={{ background: product.color }}>
         {product.image ? (
-          <img src={product.image} alt={product.name} loading="lazy" />
+          <img src={assetUrl(product.image)} alt={product.name} loading="lazy" />
         ) : (
           <span className="card-emoji" aria-hidden="true">{product.emoji}</span>
         )}
